@@ -14,6 +14,7 @@ export type Estado =
     | "GAME_OVER"
     | "INICIAR_PARTIDA"
     | "JUGANDO"
+
 export interface Carta {
     valor: number,
     url: string,
@@ -26,4 +27,3 @@ export const partida: Partida = {
     mensaje: "",
     estado: ""
 }
-

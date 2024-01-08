@@ -55,41 +55,39 @@ export const muestraPuntuacion = () => {
 
 
 // Plantarse
-export const compruebaPuntuacion = (puntuacion: number): Estado => {
-
-    puntuacion = partida.puntuacionUsuario;
+export const compruebaPuntuacion = (): Estado => {
 
     if (elementoPuntuacion && elementoMensaje &&
         elementoPuntuacion instanceof HTMLElement && elementoMensaje instanceof HTMLElement) {
 
-        if (puntuacion >= 0.5 && puntuacion <= 4) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacion}`;
+        if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
             elementoMensaje.innerHTML = `Has sido muy conservador`;
             return "HAS_SIDO_MUY_CONSERVADOR"
         }
-        if (puntuacion === 5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacion}`;
+        if (partida.puntuacionUsuario === 5) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
             elementoMensaje.innerHTML = `Te ha entrado el canguelo eh?`;
             return "TE_HA_ENTRADO_CANGUELO"
         }
-        if (puntuacion >= 6 || puntuacion === 7) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacion}`;
+        if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
             elementoMensaje.innerHTML = `Casi casi...`;
             return "CASI_CASI"
 
         };
-        if (puntuacion === 7.5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacion}`;
+        if (partida.puntuacionUsuario === 7.5) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
             elementoMensaje.innerHTML = `¡Lo has clavado! ¡Enhorabuena!`;
             return "HAS_GANADO"
         };
-        if (puntuacion > 7.5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacion}`;
+        if (partida.puntuacionUsuario > 7.5) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
             elementoMensaje.innerHTML = 'Game over';
             return "GAME_OVER"
         };
     };
-    return puntuacion === 0 ? "INICIAR_PARTIDA" : "JUGANDO";
+    return partida.puntuacionUsuario === 0 ? "INICIAR_PARTIDA" : "JUGANDO";
 
 };
 
