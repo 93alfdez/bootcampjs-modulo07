@@ -8,27 +8,41 @@ export const elementoImagenCarta = document.getElementById('imagen') as HTMLImag
 // Botón 'Pide Carta'
 export const botonDarCarta = document.getElementById('pideCarta');
 
-botonDarCarta?.addEventListener('click', () => {
+const pideCarta = () => {
     dameCarta();
     actualizaPuntuacion();
     muestraCarta();
     muestraPuntuacion();
-});
+};
+
+if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
+    botonDarCarta?.addEventListener("click", pideCarta);
+}
+
 
 // Botón 'Plantarse'
 export const botonPlantarse = document.getElementById('mePlanto');
 
-botonPlantarse?.addEventListener('click', () => {
+const mePlanto = () => {
     compruebaPuntuacion();
     quePasaria();
-});
+}
+
+if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+    botonPlantarse?.addEventListener("click", mePlanto);
+}
 
 // Botón 'Volver a jugar'
 const botonReset = document.getElementById('reset');
-botonReset?.addEventListener('click', () => {
-    iniciarPartida();
+
+const reset = () => {
     resetUI();
-});
+    iniciarPartida();
+}
+
+if (botonReset && botonReset instanceof HTMLButtonElement) {
+    botonReset?.addEventListener("click", reset);
+}
 
 // Botón 'Que pasaría'
 const botonQuePasaria = document.getElementById('quePasaria');
