@@ -1,8 +1,8 @@
 import { beforeEach, it, expect, describe, vi } from 'vitest';
 
 import { Estado } from './model';
-import { compruebaPuntuacion } from './motor';
 import * as model from './model';
+import { compruebaPuntuacion } from './motor';
 
 // Comprobar si un jugador ha ganado el juego o no
 
@@ -16,13 +16,13 @@ describe('compruebaPuntuacion', () => {
         })
 
         // Arrange
-        const puntuacion = "HAS_GANADO";
+        const estadoEsperado = "HAS GANADO";
 
         // Act
-        const resultado: Estado = "HAS_GANADO";
+        const resultado: Estado = compruebaPuntuacion();
 
         // Assert
-        expect(resultado).toBe(puntuacion);
+        expect(estadoEsperado).toBe(resultado);
 
     })
 
