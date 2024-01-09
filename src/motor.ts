@@ -44,17 +44,22 @@ export const iniciarPartida = () => {
 export const mostrarMensajePuntuacion = () => {
     if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
         partida.mensaje = `Has sido muy conservador`;
+        partida.estado = 'HAS_SIDO_MUY_CONSERVADOR';
     }
     if (partida.puntuacionUsuario === 5) {
         partida.mensaje = `Te ha entrado el canguelo eh?`;
+        partida.estado = 'TE_HA_ENTRADO_CANGUELO';
     }
     if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
         partida.mensaje = `Casi casi...`;
+        partida.estado = 'CASI_CASI';
     };
     if (partida.puntuacionUsuario === 7.5) {
         partida.mensaje = `¡Lo has clavado! ¡Enhorabuena!`;
+        partida.estado = 'HAS_GANADO';
     };
     if (partida.puntuacionUsuario > 7.5) {
         partida.mensaje = 'Game over';
+        partida.estado = 'GAME_OVER';
     };
 };
