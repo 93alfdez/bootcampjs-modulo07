@@ -1,5 +1,5 @@
 import { partida } from "./model";
-import { actualizaPuntuacion, dameCarta, iniciarPartida, muestraPuntuacion, compruebaPuntuacion } from "./motor";
+import { actualizaPuntuacion, dameCarta, iniciarPartida, mostrarMensajePuntuacion } from "./motor";
 
 export const elementoPuntuacion = document.getElementById('puntuacion');
 export const elementoMensaje = document.getElementById('mensaje');
@@ -8,48 +8,39 @@ export const elementoImagenCarta = document.getElementById('imagen') as HTMLImag
 // Botón 'Pide Carta'
 export const botonDarCarta = document.getElementById('pideCarta');
 
-const pideCarta = () => {
+botonDarCarta?.addEventListener('click', () => {
     dameCarta();
     actualizaPuntuacion();
-    muestraCarta();
-    muestraPuntuacion();
-};
-
-if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
-    botonDarCarta?.addEventListener("click", pideCarta);
-}
-
+    mostrarMensajePuntuacion();
+    mostrarCarta();
+    mostrarPuntuacion();
+    if (partida.puntuacionUsuario >= 7.5) {
+        gameOver();
+    };
+});
 
 // Botón 'Plantarse'
 export const botonPlantarse = document.getElementById('mePlanto');
 
-const mePlanto = () => {
-    compruebaPuntuacion();
+botonPlantarse?.addEventListener('click', () => {
+    mostrarMensajePuntuacion();
     quePasaria();
-}
-
-if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-    botonPlantarse?.addEventListener("click", mePlanto);
-}
+    mostrarMensaje();
+});
 
 // Botón 'Volver a jugar'
 const botonReset = document.getElementById('reset');
-
-const reset = () => {
-    resetUI();
+botonReset?.addEventListener('click', () => {
     iniciarPartida();
-}
-
-if (botonReset && botonReset instanceof HTMLButtonElement) {
-    botonReset?.addEventListener("click", reset);
-}
+    resetUI();
+});
 
 // Botón 'Que pasaría'
 const botonQuePasaria = document.getElementById('quePasaria');
 botonQuePasaria?.addEventListener('click', () => {
     dameCarta();
     actualizaPuntuacion();
-    muestraCarta();
+    mostrarCarta();
     if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
         elementoPuntuacion.innerHTML = `Tu puntuación hubiese sido de ${partida.puntuacionUsuario}`;
     };
@@ -61,8 +52,22 @@ botonQuePasaria?.addEventListener('click', () => {
     };
 });
 
+// Mostrar Puntuacion
+export const mostrarPuntuacion = () => {
+    if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
+        elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
+    };
+}
+
+// Mostrar mensaje
+export const mostrarMensaje = () => {
+    if (elementoMensaje && elementoMensaje instanceof HTMLElement) {
+        elementoMensaje.innerHTML = partida.mensaje;
+    };
+};
+
 // Mostrar Carta
-export const muestraCarta = () => {
+export const mostrarCarta = () => {
 
     elementoImagenCarta.src = partida.carta.url
 
@@ -147,3 +152,15 @@ const quePasaria = () => {
     }
 };
 
+// Game Over
+export const gameOver = () => {
+    if (partida.puntuacionUsuario >= 7.5) {
+        if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
+            botonDarCarta.disabled = true;
+        }
+        if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+            botonPlantarse.disabled = true;
+        };
+        mostrarMensaje();
+    };
+}

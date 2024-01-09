@@ -1,5 +1,5 @@
-import { partida, Estado } from "./model";
-import { elementoPuntuacion, elementoMensaje, elementoImagenCarta, botonDarCarta, botonPlantarse } from "./ui";
+import { partida } from "./model";
+import { elementoImagenCarta, } from "./ui";
 
 // Pedir carta
 export const dameCarta = () => {
@@ -29,6 +29,7 @@ export const actualizaPuntuacion = () => {
     };
 
     partida.puntuacionUsuario = partida.puntuacionUsuario + valorCarta;
+
 }
 
 //Reset
@@ -38,113 +39,22 @@ export const iniciarPartida = () => {
     partida.cartasMostradas = [];
 }
 
-// Mostrar Puntuacion
-export const muestraPuntuacion = () => {
-    if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
-        elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-    };
-
-    if (elementoMensaje && elementoMensaje instanceof HTMLElement) {
-        elementoMensaje.innerHTML = '';
-    };
-
-    if (partida.puntuacionUsuario >= 7.5) {
-        gameOver();
-    };
-}
-
 
 // Plantarse
-export const compruebaPuntuacion = (): Estado => {
-
-    if (elementoPuntuacion && elementoMensaje &&
-        elementoPuntuacion instanceof HTMLElement && elementoMensaje instanceof HTMLElement) {
-
-        if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-            elementoMensaje.innerHTML = `Has sido muy conservador`;
-            return "HAS_SIDO_MUY_CONSERVADOR"
-        }
-        if (partida.puntuacionUsuario === 5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-            elementoMensaje.innerHTML = `Te ha entrado el canguelo eh?`;
-            return "TE_HA_ENTRADO_CANGUELO"
-        }
-        if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-            elementoMensaje.innerHTML = `Casi casi...`;
-            return "CASI_CASI"
-
-        };
-        if (partida.puntuacionUsuario === 7.5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-            elementoMensaje.innerHTML = `¡Lo has clavado! ¡Enhorabuena!`;
-            return "HAS_GANADO"
-        };
-        if (partida.puntuacionUsuario > 7.5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-            elementoMensaje.innerHTML = 'Game over';
-            return "GAME_OVER"
-        };
+export const mostrarMensajePuntuacion = () => {
+    if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
+        partida.mensaje = `Has sido muy conservador`;
+    }
+    if (partida.puntuacionUsuario === 5) {
+        partida.mensaje = `Te ha entrado el canguelo eh?`;
+    }
+    if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
+        partida.mensaje = `Casi casi...`;
     };
-    return partida.puntuacionUsuario === 0 ? "INICIAR_PARTIDA" : "JUGANDO";
-
+    if (partida.puntuacionUsuario === 7.5) {
+        partida.mensaje = `¡Lo has clavado! ¡Enhorabuena!`;
+    };
+    if (partida.puntuacionUsuario > 7.5) {
+        partida.mensaje = 'Game over';
+    };
 };
-
-// Game Over
-export const gameOver = () => {
-    if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
-        if (partida.puntuacionUsuario === 7.5) {
-            botonDarCarta.disabled = true;
-        }
-    };
-
-    if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-        if (partida.puntuacionUsuario === 7.5) {
-            botonPlantarse.disabled = true;
-        }
-    };
-}
-
-
-
-/* if (elementoPuntuacion && elementoMensaje &&
-    elementoPuntuacion instanceof HTMLElement && elementoMensaje instanceof HTMLElement) {
-
-    switch (partida.estado) {
-        case "HAS_SIDO_MUY_CONSERVADOR":
-            if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
-                elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-                elementoMensaje.innerHTML = `Has sido muy conservador`;
-            }
-            break;
-        case "TE_HA_ENTRADO_CANGUELO":
-            if (partida.puntuacionUsuario === 5) {
-                elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-                elementoMensaje.innerHTML = `Te ha entrado el canguelo eh?`;
-            }
-            break;
-        case "CASI_CASI":
-            if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
-                elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-                elementoMensaje.innerHTML = `Casi casi...`;
-            };
-            break;
-        case "HAS_GANADO":
-            if (partida.puntuacionUsuario === 7.5) {
-                elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-                elementoMensaje.innerHTML = `¡Lo has clavado! ¡Enhorabuena!`;
-            };
-            break;
-        case "HAS_PERDIDO":
-            if (partida.puntuacionUsuario > 7.5) {
-                elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-                elementoMensaje.innerHTML = 'Game over';
-            };
-            break;
-        default:
-            elementoMensaje.innerHTML = '';
-            elementoPuntuacion.innerHTML = '';
-            break;
-    };
-}; */
