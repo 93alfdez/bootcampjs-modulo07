@@ -8,7 +8,7 @@ export const elementoImagenCarta = document.getElementById('imagen') as HTMLImag
 // Botón 'Pide Carta'
 export const botonDarCarta = document.getElementById('pideCarta');
 
-botonDarCarta?.addEventListener('click', () => {
+const pideCarta = () => {
     dameCarta();
     actualizaPuntuacion();
     mostrarMensajePuntuacion();
@@ -17,27 +17,35 @@ botonDarCarta?.addEventListener('click', () => {
     if (partida.puntuacionUsuario >= 7.5) {
         gameOver();
     };
-});
+}
+
+botonDarCarta?.addEventListener('click', pideCarta);
 
 // Botón 'Plantarse'
 export const botonPlantarse = document.getElementById('mePlanto');
 
-botonPlantarse?.addEventListener('click', () => {
+const mePlanto = () => {
     mostrarMensajePuntuacion();
     quePasaria();
     mostrarMensaje();
-});
+}
+
+botonPlantarse?.addEventListener('click', mePlanto);
 
 // Botón 'Volver a jugar'
 const botonReset = document.getElementById('reset');
-botonReset?.addEventListener('click', () => {
+
+const reset = () => {
     iniciarPartida();
     resetUI();
-});
+}
+
+botonReset?.addEventListener('click', reset);
 
 // Botón 'Que pasaría'
 const botonQuePasaria = document.getElementById('quePasaria');
-botonQuePasaria?.addEventListener('click', () => {
+
+const quePasariaSi = () => {
     dameCarta();
     actualizaPuntuacion();
     mostrarCarta();
@@ -50,7 +58,9 @@ botonQuePasaria?.addEventListener('click', () => {
     if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
         botonQuePasaria.disabled = true;
     };
-});
+}
+
+botonQuePasaria?.addEventListener('click', quePasariaSi);
 
 // Mostrar Puntuacion
 export const mostrarPuntuacion = () => {
