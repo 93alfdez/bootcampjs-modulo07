@@ -1,8 +1,9 @@
 import { beforeEach, it, expect, describe, vi } from 'vitest';
 
-import { Estado } from './model';
-import * as model from './model';
-import { compruebaPuntuacion } from './motor';
+// import { Estado } from './model';
+// import * as model from './model';
+import { actualizaPuntuacion } from './motor';
+import { partida } from './model';
 
 // Comprobar si un jugador ha ganado el juego o no
 
@@ -12,17 +13,17 @@ describe('compruebaPuntuacion', () => {
     it('Comprueba si un jugador ha ganado el juego', () => {
 
         beforeEach(() => {
-            vi.spyOn(model.partida, 'puntuacionUsuario', 'get').mockReturnValue(7.5);
+            vi.spyOn(partida, 'puntuacionUsuario', 'get').mockReturnValue(7.5);
         })
 
         // Arrange
-        const estadoEsperado = "HAS GANADO";
+        const puntuacionPartida = 7.5;
 
         // Act
-        const resultado: Estado = compruebaPuntuacion();
+        const resultado = actualizaPuntuacion();
 
         // Assert
-        expect(estadoEsperado).toBe(resultado);
+        expect(puntuacionPartida).toBe(resultado);
 
     })
 
