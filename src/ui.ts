@@ -11,14 +11,15 @@ export const botonDarCarta = document.getElementById('pideCarta');
 const pideCarta = () => {
     dameCarta();
     actualizaPuntuacion();
-    muestraCarta();
-    muestraPuntuacion();
-};
-
-if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
-    botonDarCarta?.addEventListener("click", pideCarta);
+    mostrarMensajePuntuacion();
+    mostrarCarta();
+    mostrarPuntuacion();
+    if (partida.puntuacionUsuario >= 7.5) {
+        gameOver();
+    };
 }
 
+botonDarCarta?.addEventListener('click', pideCarta);
 
 // Botón 'Plantarse'
 export const botonPlantarse = document.getElementById('mePlanto');
@@ -26,30 +27,28 @@ export const botonPlantarse = document.getElementById('mePlanto');
 const mePlanto = () => {
     muestraMensaje();
     quePasaria();
+    mostrarMensaje();
 }
 
-if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-    botonPlantarse?.addEventListener("click", mePlanto);
-}
+botonPlantarse?.addEventListener('click', mePlanto);
 
 // Botón 'Volver a jugar'
 const botonReset = document.getElementById('reset');
 
 const reset = () => {
-    resetUI();
     iniciarPartida();
+    resetUI();
 }
 
-if (botonReset && botonReset instanceof HTMLButtonElement) {
-    botonReset?.addEventListener("click", reset);
-}
+botonReset?.addEventListener('click', reset);
 
 // Botón 'Que pasaría'
 const botonQuePasaria = document.getElementById('quePasaria');
-botonQuePasaria?.addEventListener('click', () => {
+
+const quePasariaSi = () => {
     dameCarta();
     actualizaPuntuacion();
-    muestraCarta();
+    mostrarCarta();
     if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
         elementoPuntuacion.innerHTML = `Tu puntuación hubiese sido de ${partida.puntuacionUsuario}`;
     };
@@ -107,7 +106,7 @@ export const muestraPuntuacion = () => {
 }
 
 // Mostrar Carta
-export const muestraCarta = () => {
+export const mostrarCarta = () => {
 
     elementoImagenCarta.src = partida.carta.url
 
@@ -192,3 +191,15 @@ const quePasaria = () => {
     }
 };
 
+// Game Over
+export const gameOver = () => {
+    if (partida.puntuacionUsuario >= 7.5) {
+        if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
+            botonDarCarta.disabled = true;
+        }
+        if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
+            botonPlantarse.disabled = true;
+        };
+        mostrarMensaje();
+    };
+}

@@ -6,7 +6,7 @@ const vitestConfig: VitestUserConfigInterface = {
   test: {
     globals: true,
     restoreMocks: true,
-    environment: "happy-dom"
+    environment: 'happy-dom'
   },
 };
 

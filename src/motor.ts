@@ -85,6 +85,7 @@ export const actualizaPuntuacion = () => {
     };
 
     partida.puntuacionUsuario = partida.puntuacionUsuario + valorCarta;
+
 }
 
 //Reset
