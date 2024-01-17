@@ -15,30 +15,44 @@ import { botonDarCarta, botonPlantarse } from "./ui";
 export const generarNumeroAleatorio = () => {
     return Math.floor(Math.random() * 10 + 1);
 }
+// Pedir carta
+export const dameCarta = () => {
+    partida.carta.valor = generarNumeroAleatorio();
+    actualizaValorCartaActual();
+    actualizaCartasMostradas();
 
-export const actualizaValorCartaActual = (numero: number) => {
-    if (numero > 7) {
-        partida.carta.valor = numero + 2;
+};
+
+export const actualizaValorCartaActual = () => {
+
+    if (partida.carta.valor > 7) {
+        partida.carta.valor = partida.carta.valor + 2;
     };
 }
 
-export const actualizaCartasMostradas = (carta: number) => {
+export const actualizaCartasMostradas = () => {
+
     // Cartas Mostradas
-    if (partida.cartasMostradas.includes(carta)) {
+    if (partida.cartasMostradas.includes(partida.carta.valor)) {
         dameCarta();
         return
     };
 
-    partida.cartasMostradas.push(carta);
+    partida.cartasMostradas.push(partida.carta.valor);
 }
 
-// Pedir carta
-export const dameCarta = () => {
-    const numeroAleatorio = generarNumeroAleatorio();
-    actualizaValorCartaActual(numeroAleatorio);
-    actualizaCartasMostradas(numeroAleatorio);
 
-};
+// Actualiza la puntuación
+export const actualizaPuntuacion = () => {
+    let valorCarta: number = partida.carta.valor;
+
+    if (partida.carta.valor >= 10) {
+        valorCarta = 0.5;
+    };
+
+    partida.puntuacionUsuario = partida.puntuacionUsuario + valorCarta;
+
+}
 
 
 export const actualizarEstado = () => {
@@ -72,21 +86,6 @@ export const compruebaPuntuacion = () => {
     };
 }
 
-// Actualiza la puntuación
-export const actualizaPuntuacion = () => {
-    let valorCarta: number = partida.carta.valor;
-
-    if (partida.carta.valor >= 10) {
-        valorCarta = 0.5;
-    };
-
-    if (partida.puntuacionUsuario >= 7.5) {
-        gameOver();
-    };
-
-    partida.puntuacionUsuario = partida.puntuacionUsuario + valorCarta;
-
-}
 
 //Reset
 export const iniciarPartida = () => {

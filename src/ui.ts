@@ -1,5 +1,5 @@
 import { partida } from "./model";
-import { actualizaPuntuacion, dameCarta, iniciarPartida, gameOver } from "./motor";
+import { actualizaPuntuacion, dameCarta, iniciarPartida, compruebaPuntuacion } from "./motor";
 
 export const elementoPuntuacion = document.getElementById('puntuacion');
 export const elementoMensaje = document.getElementById('mensaje');
@@ -11,8 +11,8 @@ export const botonDarCarta = document.getElementById('pideCarta');
 const pideCarta = () => {
     dameCarta();
     actualizaPuntuacion();
-    mostrarMensajePuntuacion();
     mostrarCarta();
+    mostrarMensaje();
     mostrarPuntuacion();
     if (partida.puntuacionUsuario >= 7.5) {
         gameOver();
@@ -25,7 +25,6 @@ botonDarCarta?.addEventListener('click', pideCarta);
 export const botonPlantarse = document.getElementById('mePlanto');
 
 const mePlanto = () => {
-    muestraMensaje();
     quePasaria();
     mostrarMensaje();
 }
@@ -58,11 +57,13 @@ const quePasariaSi = () => {
     if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
         botonQuePasaria.disabled = true;
     };
-});
+};
+
+botonQuePasaria?.addEventListener('click', quePasariaSi);
 
 
 // Muestra mensaje
-const muestraMensaje = () => {
+const mostrarMensaje = () => {
 
     if (elementoPuntuacion && elementoMensaje &&
         elementoPuntuacion instanceof HTMLElement && elementoMensaje instanceof HTMLElement) {
@@ -94,7 +95,7 @@ const muestraMensaje = () => {
 };
 
 // Mostrar Puntuacion
-export const muestraPuntuacion = () => {
+export const mostrarPuntuacion = () => {
     if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
         elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
     };
@@ -172,6 +173,10 @@ const resetUI = () => {
         elementoMensaje instanceof HTMLElement) {
         elementoMensaje.innerHTML = '';
     };
+
+    if (elementoImagenCarta && elementoImagenCarta instanceof HTMLElement) {
+        elementoImagenCarta.src = '/src/images/back.png';
+    };
 };
 
 // Que pasaría
@@ -188,6 +193,7 @@ const quePasaria = () => {
         if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
             botonQuePasaria.className = 'mostrar';
         }
+        compruebaPuntuacion();
     }
 };
 

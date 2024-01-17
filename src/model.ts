@@ -29,6 +29,7 @@ export type Estado =
 export const NO_INICIADA = "No inicializada";
 export const JUGANDO_PARTIDA = "Jugando";
 export const PARTIDA_TERMINADA = "Partida terminada";
+
 export interface Carta {
     valor: number,
     url: string,
