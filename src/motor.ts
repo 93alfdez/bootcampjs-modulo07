@@ -18,19 +18,21 @@ export const generarNumeroAleatorio = () => {
 // Pedir carta
 export const dameCarta = () => {
     partida.carta.valor = generarNumeroAleatorio();
-    actualizaValorCartaActual();
-    actualizaCartasMostradas();
+    const numeroAleatorio = partida.carta.valor;
+    actualizaValorCartaActual(numeroAleatorio);
+    actualizaCartasMostradas(numeroAleatorio);
 
 };
 
-export const actualizaValorCartaActual = () => {
+export const actualizaValorCartaActual = (numero: number) => {
+    numero = partida.carta.valor;
 
     if (partida.carta.valor > 7) {
         partida.carta.valor = partida.carta.valor + 2;
     };
 }
 
-export const actualizaCartasMostradas = () => {
+export const actualizaCartasMostradas = (carta: number) => {
 
     // Cartas Mostradas
     if (partida.cartasMostradas.includes(partida.carta.valor)) {
