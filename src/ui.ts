@@ -1,4 +1,15 @@
-import { partida } from "./model";
+import {
+    partida,
+    // JUGANDO_PARTIDA,
+    // MENSAJE_CANGUELO,
+    // MENSAJE_CASI,
+    // MENSAJE_CONSERVADOR,
+    // MENSAJE_ENHORABUENA,
+    // MENSAJE_GAMEOVER,
+    // NO_INICIADA,
+    // PARTIDA_TERMINADA,
+} from "./model";
+
 import { actualizaPuntuacion, dameCarta, iniciarPartida, compruebaPuntuacion } from "./motor";
 
 export const elementoPuntuacion = document.getElementById('puntuacion');
@@ -11,6 +22,7 @@ export const botonDarCarta = document.getElementById('pideCarta');
 const pideCarta = () => {
     dameCarta();
     actualizaPuntuacion();
+    compruebaPuntuacion();
     mostrarCarta();
     mostrarMensaje();
     mostrarPuntuacion();
@@ -90,6 +102,7 @@ const mostrarMensaje = () => {
         if (partida.puntuacionUsuario > 7.5) {
             elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
             elementoMensaje.innerHTML = partida.mensaje;
+            console.log(partida.mensaje);
         };
     };
 };
